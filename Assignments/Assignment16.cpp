@@ -19,15 +19,39 @@ struct node* newNode(int data)
     return node;
 }
 
+int maxValue(struct node* node)
+{
+    if (node == NULL) {
+        return INT16_MIN;
+    }
+    int value = node->data;
+    int leftMax = maxValue(node->left);
+    int rightMax = maxValue(node->right);
+
+    return max(value, max(leftMax, rightMax));
+}
+
+int minValue(struct node* node)
+{
+    if (node == NULL) {
+        return INT16_MAX;
+    }
+    int value = node->data;
+    int leftMax = minValue(node->left);
+    int rightMax = minValue(node->right);
+
+    return min(value, min(leftMax, rightMax));
+}
+
 bool checkIsBST (struct node *root) {
 
     if(root == NULL)
         return true;
     if(root->left != NULL)
-        if(root -> left -> data >= root->data)
+        if(maxValue(root -> left) >= root->data)
             return false;
     if(root -> right != NULL)
-        if(root->right->data <= root -> data)
+        if(minValue(root->right) <= root -> data)
             return false;
 
     bool left = checkIsBST(root->left);
