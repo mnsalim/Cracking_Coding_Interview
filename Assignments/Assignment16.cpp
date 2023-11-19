@@ -18,23 +18,23 @@ struct node* newNode(int data)
 
     return node;
 }
-
 int maxValue(struct node* node)
 {
     if (node == NULL) {
-        return INT16_MIN;
+        return INT32_MIN;
     }
     int value = node->data;
+//    cout << node->data << endl;;
     int leftMax = maxValue(node->left);
     int rightMax = maxValue(node->right);
-
+//    cout << "left max: " <<leftMax << " rightmax = " << rightMax <<endl;
     return max(value, max(leftMax, rightMax));
 }
 
 int minValue(struct node* node)
 {
     if (node == NULL) {
-        return INT16_MAX;
+        return INT32_MAX;
     }
     int value = node->data;
     int leftMax = minValue(node->left);
@@ -42,13 +42,12 @@ int minValue(struct node* node)
 
     return min(value, min(leftMax, rightMax));
 }
-
 bool checkIsBST (struct node *root) {
 
     if(root == NULL)
         return true;
     if(root->left != NULL)
-        if(maxValue(root -> left) >= root->data)
+        if(maxValue(root -> left)>= root->data)
             return false;
     if(root -> right != NULL)
         if(minValue(root->right) <= root -> data)
@@ -62,8 +61,8 @@ bool checkIsBST (struct node *root) {
 
 
 /*
-    Time complexity: O(V * E) where V = noOfNodes, E= noOfEdges;
-    Space Complexity: O(V+E)
+    Time complexity: O(N)
+    Space Complexity: O(1)
 */
 
 int main()
@@ -80,5 +79,6 @@ int main()
 
     std::cout << std::boolalpha;
     cout<< checkIsBST(root) <<endl;
+//    maxValue(root -> right);
     return 0;
 }
