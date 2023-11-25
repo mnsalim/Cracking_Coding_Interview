@@ -32,7 +32,7 @@ struct node* searchBST (struct node *root, int val) {
 
 
 /*
-    Time complexity: O(N)
+    Time complexity: O(log(N))
     Space Complexity: O(1)
 */
 
